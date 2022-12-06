@@ -52,24 +52,17 @@ const AddEmployeeDetails = async (req,res)=>{
 
 //2.get employeeRoles(both)
 const getEmployeeRoles = async (req,res)=>{
-
-    // try{
-
-    //     if()
     let rolesid=req.params.rolesid
     let data = await db.roles.findAll({
           attributes:['title'],
         include:[{
             model:'db.employee',
-            attributes: [],
+            attributes: ['Fname','Lname','Email'],
         }],
         where :{rolesid:rolesid}
     })
+    res.status(200).send(data)
 }
-    // catch(err)
-
-    (res.status(200).send(data))
-// }
 
 
 module.exports={
@@ -77,6 +70,7 @@ module.exports={
     getAllroles,
     updateroles,
      
+    
     AddEmployeeDetails,
     getEmployeeRoles
 }
